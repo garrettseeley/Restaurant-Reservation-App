@@ -9,6 +9,7 @@ export default function ReservationItem({reservation}) {
       <td>{reservation.reservation_date}</td>
       <td>{reservation.reservation_time}</td>
       <td>{reservation.people}</td>
+      <td>{reservation.status}</td>
     </tr>
   )
 }
