@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function reservationItem({reservation}) {
+export default function ReservationItem({reservation}) {
   return (
     <tr>
       <td>{reservation.reservation_id}</td>
