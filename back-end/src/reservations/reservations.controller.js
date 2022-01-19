@@ -9,7 +9,7 @@ const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 // Middleware validation
 async function validReservation(req, res, next) {
   const { data } = req.body;
-  const errorMsgs = []
+  const errorMsgs = [];
   if (!data) {
     return next({ status: 400, message: "Data is missing" });
   }
@@ -24,41 +24,46 @@ async function validReservation(req, res, next) {
 
   requiredFields.forEach((field) => {
     if (!data[field]) {
-      errorMsgs.push(`Please enter a ${field} for the reservation.`)
+      errorMsgs.push("Please enter " + (field === "people" ? `the number of people` : `a ${field}`) + " for the reservation.");
     }
   });
 
-  let reservationDate = new Date(`${data.reservation_date} ${data.reservation_time}`)
+  let reservationDate = new Date(
+    `${data.reservation_date} ${data.reservation_time}`
+  );
   if (reservationDate.getDay() === 2) {
-    errorMsgs.push(`Restaurant is closed on Tuesdays.`)
+    errorMsgs.push(`Restaurant is closed on Tuesdays.`);
   }
 
-  if (!Number.isInteger(data.people)) {
-      errorMsgs.push("people must be a number.")
+  if (!Number.isInteger(data.people) || data.people < 1) {
+    errorMsgs.push("The number of people must be a number greater than zero.");
   }
   if (data.reservation_date && data.reservation_time) {
     if (!data.reservation_date.match(dateFormat)) {
-      errorMsgs.push(`The reservation_date must be a valid date in the format 'YYYY-MM-DD'.`)
+      errorMsgs.push(
+        `The reservation_date must be a valid date in the format 'YYYY-MM-DD'.`
+      );
     }
 
     if (!data.reservation_time.match(timeFormat)) {
-      errorMsgs.push(`The reservation_time must be a valid date in the format '12:30'.`)
+      errorMsgs.push(
+        `The reservation_time must be a valid date in the format '12:30'.`
+      );
     }
   }
   const today = new Date();
 
-  if(reservationDate < today) {
-    errorMsgs.push(`The reservation date and time must be in the future.`)
+  if (reservationDate < today) {
+    errorMsgs.push(`The reservation date and time must be in the future.`);
   }
   if (errorMsgs.length) {
     next({
       status: 400,
-      message: errorMsgs.join(" ")
-    })
+      message: errorMsgs.join(" "),
+    });
   }
   next();
 }
-
 
 // CRUD functions
 async function list(req, res) {
