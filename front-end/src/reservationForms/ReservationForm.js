@@ -107,10 +107,10 @@ export default function ReservationForm({setReservation, reservation, submitHand
                   id="people"
                   name="people"
                   placeholder="Number of People in Party"
-                  required
                   value={reservation.people}
                   onChange={changeHandler}
                   className="form-control"
+                  required 
                   min="1"
                 />
               </div>
