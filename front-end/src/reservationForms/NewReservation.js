@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { postReservation } from "../utils/api";
 import { asDateString } from "../utils/date-time";
 import ReservationForm from "./ReservationForm";
+import ErrorList from "../layout/ErrorList";
 
 export default function NewReservation() {
   const history = useHistory();
@@ -18,18 +19,18 @@ export default function NewReservation() {
   };
 
   const [reservation, setReservation] = useState({ ...initialState });
-  const [resErrors, setResErrors] = useState([]);
+  const [reservationErrors, setReservationErrors] = useState(null);
 
   async function submitHandler(event) {
     event.preventDefault();
-
     try {
       await postReservation({
         ...reservation,
         people: Number(reservation.people),
       });
     } catch (error) {
-      return setResErrors(error.message);
+      setReservationErrors(error);
+      return;
     }
     let resDate = reservation.reservation_date;
     setReservation({ ...initialState });
@@ -38,13 +39,7 @@ export default function NewReservation() {
 
   return (
     <>
-      {resErrors.length === 0 ? null : (
-        <ul className="alert alert-danger">
-          {resErrors.map((r, index) => (
-            <li key={index}>{r}</li>
-          ))}
-        </ul>
-      )}
+      <ErrorList error={reservationErrors}/>
       <ReservationForm
         reservation={reservation}
         setReservation={setReservation}
