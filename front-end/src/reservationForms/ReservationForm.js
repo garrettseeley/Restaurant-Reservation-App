@@ -11,8 +11,6 @@ export default function ReservationForm({setReservation, reservation, submitHand
     }));
   }
 
-
-
   async function cancelHandler(event) {
     event.preventDefault();
     history.push(`/dashboard`);
