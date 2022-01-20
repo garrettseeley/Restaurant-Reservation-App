@@ -10,7 +10,6 @@ const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 async function validReservation(req, res, next) {
   const { data } = req.body;
   const errorMsgs = [];
-  console.log(req.body.data)
   if (!data) {
     return next({ status: 400, message: "Data is missing" });
   }
