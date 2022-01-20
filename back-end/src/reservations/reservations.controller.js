@@ -58,6 +58,14 @@ async function validReservation(req, res, next) {
   if (reservationDate <= data.today || reservationDate < backToday) {
     errorMsgs.push(`The reservation date and time must be in the future.`);
   }
+  if (data.reservation_time) {
+    // console.log(data.reservation_time.replace(/[:]/g, ""))
+    let resTime = Number(data.reservation_time.replace(/[:]/g, ""))
+    if (resTime < 1030 || resTime > 2130) {
+      errorMsgs.push(`Please select a reservation time between 10:30 AM and 9:30 PM.`)
+    }
+  }
+  
   if (errorMsgs.length) {
     next({
       status: 400,
