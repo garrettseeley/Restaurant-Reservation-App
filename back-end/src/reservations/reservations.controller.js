@@ -10,6 +10,7 @@ const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 async function validReservation(req, res, next) {
   const { data } = req.body;
   const errorMsgs = [];
+  console.log(req.body.data)
   if (!data) {
     return next({ status: 400, message: "Data is missing" });
   }
@@ -23,8 +24,11 @@ async function validReservation(req, res, next) {
   ];
 
   requiredFields.forEach((field) => {
+    
     if (!data[field]) {
-      errorMsgs.push("Please enter " + (field === "people" ? `the number of people` : `a ${field}`) + " for the reservation.");
+      errorMsgs.push("Please enter " + (        
+        field === "people" ? `the number of people` : `a ${field}`
+        ) + " for the reservation.");
     }
   });
 
@@ -51,9 +55,8 @@ async function validReservation(req, res, next) {
       );
     }
   }
-  const today = new Date();
-
-  if (reservationDate < today) {
+  let backToday = new Date()
+  if (reservationDate <= data.today || reservationDate < backToday) {
     errorMsgs.push(`The reservation date and time must be in the future.`);
   }
   if (errorMsgs.length) {
@@ -73,7 +76,16 @@ async function list(req, res) {
 }
 
 async function create(req, res) {
-  const data = await service.create(req.body.data);
+  const body = req.body.data;
+  const reqBody = {
+    first_name: body.first_name,
+    last_name: body.last_name,
+    mobile_number: body.mobile_number,
+    reservation_date: body.reservation_date,
+    reservation_time: body.reservation_time,
+    people: body.people
+  }
+  const data = await service.create(reqBody);
   res.status(201).json({ data });
 }
 

@@ -7,15 +7,16 @@ import ErrorList from "../layout/ErrorList";
 
 export default function NewReservation() {
   const history = useHistory();
-  const date = new Date();
+  const today = new Date();
 
   const initialState = {
     first_name: "",
     last_name: "",
     mobile_number: "",
-    reservation_date: asDateString(date),
-    reservation_time: date.toTimeString().slice(0, 5),
+    reservation_date: asDateString(today),
+    reservation_time: today.toTimeString().slice(0, 5),
     people: "",
+    today: new Date(),
   };
 
   const [reservation, setReservation] = useState({ ...initialState });
