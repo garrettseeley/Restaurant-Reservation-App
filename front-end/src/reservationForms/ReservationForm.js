@@ -1,7 +1,11 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-export default function ReservationForm({setReservation, reservation, submitHandler}) {
+export default function ReservationForm({
+  setReservation,
+  reservation,
+  submitHandler,
+}) {
   const history = useHistory();
 
   function changeHandler({ target: { name, value } }) {
@@ -18,11 +22,11 @@ export default function ReservationForm({setReservation, reservation, submitHand
 
   return (
     <>
+      <div className="row">
+        <h2 className="col">Create Reservation</h2>
+      </div>
       <form>
         <fieldset>
-          <div className="row">
-            <h2 className="col">Create Reservation</h2>
-          </div>
           <div className="row">
             <div className="form-group col">
               <label htmlFor="first_name">First Name</label>
@@ -110,7 +114,7 @@ export default function ReservationForm({setReservation, reservation, submitHand
                   value={reservation.people}
                   onChange={changeHandler}
                   className="form-control"
-                  required 
+                  required
                   min="1"
                 />
               </div>
@@ -133,5 +137,5 @@ export default function ReservationForm({setReservation, reservation, submitHand
         </fieldset>
       </form>
     </>
-  )
+  );
 }
