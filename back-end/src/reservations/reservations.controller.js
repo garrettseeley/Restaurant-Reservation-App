@@ -75,11 +75,30 @@ async function validReservation(req, res, next) {
   next();
 }
 
+async function reservationExists(req, res, next) {
+  let { reservation_id } = req.params;
+  const reservation = await service.read(reservation_id)
+
+  if (!reservation) {
+    next({
+      status: 404,
+      message: `reservation_id ${reservation_id} does not exist`,
+    })
+  }
+  res.locals.reservation = reservation;
+  next();
+}
+
 // CRUD functions
 async function list(req, res) {
   let date = req.query.date;
   const data = await service.list(date);
   res.status(200).json({ data });
+}
+
+async function read(req, res) {
+  let reservation = res.locals.reservation
+  res.status(200).json({ data: reservation })
 }
 
 async function create(req, res) {
@@ -99,4 +118,5 @@ async function create(req, res) {
 module.exports = {
   list: [asyncErrorBoundary(list)],
   create: [validReservation, asyncErrorBoundary(create)],
+  read: [asyncErrorBoundary(reservationExists), asyncErrorBoundary(read)]
 };

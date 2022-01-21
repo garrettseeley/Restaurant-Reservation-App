@@ -7,7 +7,7 @@ export default function ReservationList({reservations}) {
     <ReservationItem reservation={reservation} />
   ))
   return (
-    <table class="table mt-3">
+    <table className="table mt-3">
       <thead>
         <tr>
           <th>#</th>
@@ -17,6 +17,7 @@ export default function ReservationList({reservations}) {
           <th>TIME</th>
           <th>PEOPLE</th>
           <th>STATUS</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>

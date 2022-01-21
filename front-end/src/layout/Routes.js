@@ -5,6 +5,8 @@ import NotFound from "./NotFound";
 import { today } from "../utils/date-time";
 import NewReservation from "../reservationForms/NewReservation";
 import useQuery from "../utils/useQuery";
+import NewTable from "../tableForms/NewTable";
+import SeatTable from "../SeatTable";
 
 /**
  * Defines all the routes for the application.
@@ -15,18 +17,24 @@ import useQuery from "../utils/useQuery";
  */
 function Routes() {
   const query = useQuery();
-  let date = query.get("date")
+  let date = query.get("date");
 
   return (
     <Switch>
       <Route exact={true} path="/">
         <Redirect to={"/dashboard"} />
       </Route>
+      <Route path="/reservations/:reservation_id/seat">
+        <SeatTable />
+      </Route>
       <Route exact={true} path="/reservations">
         <Redirect to={"/dashboard"} />
       </Route>
       <Route path="/reservations/new">
         <NewReservation />
+      </Route>
+      <Route path="/tables/new">
+        <NewTable />
       </Route>
       <Route path="/dashboard">
         <Dashboard date={date || today()} />
