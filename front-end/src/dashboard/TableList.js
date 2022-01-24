@@ -1,10 +1,20 @@
 import React from "react";
 import TableItem from "./TableItem";
 
-export default function TableList({tables}) {
+export default function TableList({
+  tables,
+  setTables,
+  setReservations,
+  date,
+}) {
   const listItems = tables.map((table) => (
-    <TableItem table={table} />
-  ))
+    <TableItem
+      table={table}
+      setTables={setTables}
+      setReservations={setReservations}
+      date={date}
+    />
+  ));
   return (
     <table className="table mt-3">
       <thead>
@@ -16,9 +26,7 @@ export default function TableList({tables}) {
           <th></th>
         </tr>
       </thead>
-      <tbody>
-        {listItems}
-      </tbody>
+      <tbody>{listItems}</tbody>
     </table>
-  )
+  );
 }
