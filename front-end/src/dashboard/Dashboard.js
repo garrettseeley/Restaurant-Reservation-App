@@ -59,7 +59,7 @@ function Dashboard({ date }) {
             </Link>
           </div>
           <ErrorList error={reservationsError} />
-          {/* {JSON.stringify(reservations)} */}
+
           <div>
             <ReservationList reservations={reservations} />
           </div>
@@ -67,7 +67,12 @@ function Dashboard({ date }) {
         <div className="col">
           <ErrorList error={tablesError} />
           <div>
-            <TableList tables={tables} />
+            <TableList
+              tables={tables}
+              setTables={setTables}
+              setReservations={setReservations}
+              date={date}
+            />
           </div>
         </div>
       </div>
