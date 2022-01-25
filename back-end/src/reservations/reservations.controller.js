@@ -130,7 +130,13 @@ function validStatusUpdate(req, res, next) {
 // CRUD functions
 async function list(req, res) {
   const { date } = req.query;
-  const data = await service.list(date);
+  const { mobile_number} = req.query;
+  let data;
+  if (date) {
+    data = await service.list(date);
+  } else if (mobile_number) {
+    data = await service.search(mobile_number);
+  }
   res.status(200).json({ data });
 }
 

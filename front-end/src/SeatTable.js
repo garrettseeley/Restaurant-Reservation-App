@@ -63,18 +63,20 @@ export default function SeatTable() {
           Please select a table for reservation #{reservation_id}
         </h4>
       </div>
-      <div>
-        <select
-          id="inputState"
-          name="table_id"
-          required
-          value={currentTable}
-          onChange={changeHandler}
-          className="form-control"
-        >
-          <option value={0}>Select a table</option>
-          {tableOptions}
-        </select>
+      <div className="row">
+        <div className="col-auto">
+          <select
+            id="input"
+            name="table_id"
+            required
+            value={currentTable}
+            onChange={changeHandler}
+            className="form-control"
+          >
+            <option value={0}>Select a table</option>
+            {tableOptions}
+          </select>
+        </div>
       </div>
       <div className="mt-2">
         <button
