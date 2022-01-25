@@ -8,13 +8,6 @@ function read(table_id) {
   return knex("tables").select("*").where({ table_id: table_id }).first();
 }
 
-function readRes(reservation_id) {
-  return knex("reservations")
-    .select("*")
-    .where({ reservation_id: reservation_id })
-    .first();
-}
-
 function create(table) {
   return knex("tables")
     .insert(table)
@@ -43,6 +36,5 @@ module.exports = {
   create,
   read,
   update,
-  readRes,
   delete: destroy,
 };
