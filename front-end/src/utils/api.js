@@ -73,6 +73,11 @@ export async function listTables(signal) {
   return await fetchJson(url, {headers, signal}, [])
 }
 
+export async function mobileNumberSearch(number, signal) {
+  const url = new URL(`${API_BASE_URL}/reservations?mobile_number=${number}`)
+  return await fetchJson(url, {headers, signal}, [])
+}
+
 export async function postReservation(reservation, signal) {
   const url = `${API_BASE_URL}/reservations`;
   const options = {
