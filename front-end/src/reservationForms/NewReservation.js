@@ -16,7 +16,6 @@ export default function NewReservation() {
     reservation_date: asDateString(today),
     reservation_time: today.toTimeString().slice(0, 5),
     people: "",
-    today: new Date(),
   };
 
   const [reservation, setReservation] = useState({ ...initialState });

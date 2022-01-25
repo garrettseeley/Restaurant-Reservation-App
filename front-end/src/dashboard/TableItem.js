@@ -23,8 +23,14 @@ export default function TableItem({ table, setTables, setReservations, date }) {
     return () => abortController.abort();
   }
 
+  function refreshRes() {
+    const abortController = new AbortController();
+    listReservations({ date }, abortController.signal).then(setReservations);
+    return () => abortController.abort();
+  }
+
   return (
-    <tr data-table-id-status={table.table_id}>
+    <tr key={table.table_id} data-table-id-status={table.table_id}>
       <td>{table.table_id}</td>
       <td>{table.table_name}</td>
       <td>{table.capacity}</td>
@@ -37,7 +43,7 @@ export default function TableItem({ table, setTables, setReservations, date }) {
           onClick={
             (event) => {
               event.preventDefault();
-              deleteHandler(table).then(refreshTables)
+              deleteHandler(table).then(refreshTables).then(refreshRes)
             }
           }
         >

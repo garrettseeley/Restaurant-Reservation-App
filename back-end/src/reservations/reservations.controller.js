@@ -129,9 +129,7 @@ function validStatusUpdate(req, res, next) {
 
 // CRUD functions
 async function list(req, res) {
-  console.log("hello");
   const { date } = req.query;
-  console.log(date);
   const data = await service.list(date);
   res.status(200).json({ data });
 }
