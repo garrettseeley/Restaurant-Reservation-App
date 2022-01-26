@@ -23,11 +23,12 @@ export default function NewReservation() {
 
   async function submitHandler(event) {
     event.preventDefault();
+    const abortController = new AbortController();
     try {
       await postReservation({
         ...reservation,
         people: Number(reservation.people),
-      });
+      }, abortController.signal);
     } catch (error) {
       setReservationErrors(error);
       return;
