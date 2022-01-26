@@ -7,7 +7,7 @@ export default function ReservationItem({ reservation, refreshRes }) {
     const abortController = new AbortController();
 
     let result = window.confirm(
-      "Do you want to cancel this reservation? /n This cannot be undone."
+      "Do you want to cancel this reservation? \n This cannot be undone."
     );
     if (result) {
       return updateResStatus(

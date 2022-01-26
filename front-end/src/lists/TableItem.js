@@ -9,7 +9,7 @@ export default function TableItem({ table, setTables, setReservations, date }) {
     const abortController = new AbortController();
 
     let result = window.confirm(
-      "Is this table ready to seat new guests? /n This cannot be undone."
+      "Is this table ready to seat new guests? \n This cannot be undone."
     );
     if (result) {
       return deleteSeat(table, abortController.signal).then();
