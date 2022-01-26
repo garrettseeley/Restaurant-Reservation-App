@@ -61,7 +61,12 @@ export default function Search() {
         {reservations.length > 0 && searched && (
           <div className="row">
             <div className="col">
-            <ReservationList reservations={reservations}/>
+              <ReservationList
+                reservations={reservations}
+                setReservations={setReservations}
+                fromSearch={true}
+                number={number}
+              />
             </div>
           </div>
         )}

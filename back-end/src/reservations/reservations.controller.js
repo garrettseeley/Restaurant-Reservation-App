@@ -130,7 +130,7 @@ function validStatusUpdate(req, res, next) {
 // CRUD functions
 async function list(req, res) {
   const { date } = req.query;
-  const { mobile_number} = req.query;
+  const { mobile_number } = req.query;
   let data;
   if (date) {
     data = await service.list(date);
@@ -159,6 +159,11 @@ async function statusUpdate(req, res) {
   res.status(200).json({ data });
 }
 
+async function update(req, res) {
+  const data = await service.update(req.body.data);
+  res.status(200).json({ data });
+}
+
 module.exports = {
   list: [asyncErrorBoundary(list)],
   create: [validReservation, notSeated, asyncErrorBoundary(create)],
@@ -168,4 +173,10 @@ module.exports = {
     validStatusUpdate,
     asyncErrorBoundary(statusUpdate),
   ],
+  update: [
+    asyncErrorBoundary(reservationExists),
+    validReservation,
+    notSeated,
+    asyncErrorBoundary(update)
+  ]
 };

@@ -16,7 +16,7 @@ export default function TableList({
     />
   ));
   return (
-    <table className="table mt-3">
+    <table className="table mt-3 w-auto">
       <thead>
         <tr>
           <th>#</th>

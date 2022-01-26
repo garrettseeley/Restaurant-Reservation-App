@@ -61,12 +61,20 @@ function Dashboard({ date }) {
           <ErrorList error={reservationsError} />
 
           <div>
-            <ReservationList reservations={reservations} />
+            <ReservationList
+              reservations={reservations}
+              setReservations={setReservations}
+              date={date}
+              fromSearch={false}
+            />
           </div>
         </div>
+      </div>
+      <div className="row">
         <div className="col">
           <ErrorList error={tablesError} />
           <div>
+            <h4>Tables</h4>
             <TableList
               tables={tables}
               setTables={setTables}

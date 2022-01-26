@@ -36,19 +36,19 @@ export default function TableItem({ table, setTables, setReservations, date }) {
       <td>{table.capacity}</td>
       <td>{status}</td>
       <td>
-      {table.reservation_id && (<button
-          type="button"
-          className="btn btn-outline-secondary btn-sm"
-          data-table-id-finish={table.table_id}
-          onClick={
-            (event) => {
+        {table.reservation_id && (
+          <button
+            type="button"
+            className="btn btn-outline-secondary btn-sm"
+            data-table-id-finish={table.table_id}
+            onClick={(event) => {
               event.preventDefault();
-              deleteHandler(table).then(refreshTables).then(refreshRes)
-            }
-          }
-        >
-          Finish
-        </button>)}
+              deleteHandler(table).then(refreshTables).then(refreshRes);
+            }}
+          >
+            Finish
+          </button>
+        )}
       </td>
     </tr>
   );
