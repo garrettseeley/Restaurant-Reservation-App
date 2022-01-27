@@ -27,9 +27,9 @@ export default function Search() {
   return (
     <>
       <div className="row">
-        <h2 className="col">Search by Mobile Number</h2>
+        <h2 className="col d-flex justify-content-center">Search by Mobile Number</h2>
       </div>
-      <div className="row">
+      <div className="row d-flex justify-content-center mt-3">
         <div className="col-auto">
           <input
             id="input"
@@ -38,6 +38,7 @@ export default function Search() {
             value={number}
             onChange={changeHandler}
             className="form-control"
+            placeholder="Please enter a number"
           />
         </div>
         <div className="row">
@@ -52,14 +53,14 @@ export default function Search() {
           </div>
         </div>
       </div>
-      <div>
+      <div className="d-flex justify-content-center">
         {!reservations.length && searched && (
           <div className="row">
-            <div className="col">No reservations found</div>
+            <div className="col text-danger mt-4"><h3>No reservations found</h3></div>
           </div>
         )}
         {reservations.length > 0 && searched && (
-          <div className="row">
+          <div className="row mt-4">
             <div className="col">
               <ReservationList
                 reservations={reservations}

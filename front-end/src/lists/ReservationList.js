@@ -9,6 +9,7 @@ export default function ReservationList({
   fromSearch,
   number,
 }) {
+  // function to refresh the reservations list when the cancel button is pressed and confirmed
   function refreshRes() {
     const abortController = new AbortController();
     if (!fromSearch) {
@@ -20,8 +21,11 @@ export default function ReservationList({
     return () => abortController.abort();
   }
 
+  // maps each item from the reservations to a table row
   const listItems = reservations.map((reservation) => (
-    <ReservationItem reservation={reservation} refreshRes={refreshRes} />
+    <tr key={reservation.reservation_id}>
+      <ReservationItem reservation={reservation} refreshRes={refreshRes} />
+    </tr>
   ));
   return (
     <>
@@ -32,8 +36,8 @@ export default function ReservationList({
       </div>
       <div>
         {reservations.length > 0 && (
-          <table className="table mt-3 w-auto">
-            <thead>
+          <table className="table mt-3 w-auto table-bordered">
+            <thead className="thead-ox">
               <tr>
                 <th>#</th>
                 <th>NAME</th>
@@ -45,7 +49,7 @@ export default function ReservationList({
                 <th></th>
               </tr>
             </thead>
-            <tbody>{listItems}</tbody>
+            <tbody className="tbody-white">{listItems}</tbody>
           </table>
         )}
       </div>

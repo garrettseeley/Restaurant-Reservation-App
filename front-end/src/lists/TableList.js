@@ -7,17 +7,20 @@ export default function TableList({
   setReservations,
   date,
 }) {
+  // maps each item from the table to the table row
   const listItems = tables.map((table) => (
-    <TableItem
-      table={table}
-      setTables={setTables}
-      setReservations={setReservations}
-      date={date}
-    />
+    <tr key={table.table_id}>
+      <TableItem
+        table={table}
+        setTables={setTables}
+        setReservations={setReservations}
+        date={date}
+      />
+    </tr>
   ));
   return (
-    <table className="table mt-3 w-auto">
-      <thead>
+    <table className="table mt-3 w-auto table-bordered">
+      <thead className="thead-ox">
         <tr>
           <th>#</th>
           <th>TABLE NAME</th>
@@ -26,7 +29,7 @@ export default function TableList({
           <th></th>
         </tr>
       </thead>
-      <tbody>{listItems}</tbody>
+      <tbody className="tbody-white">{listItems}</tbody>
     </table>
   );
 }

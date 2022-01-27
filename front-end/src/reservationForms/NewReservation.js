@@ -3,12 +3,13 @@ import { useHistory } from "react-router-dom";
 import { postReservation } from "../utils/api";
 import { asDateString } from "../utils/date-time";
 import ReservationForm from "./ReservationForm";
-import ErrorList from "../layout/ErrorList";
+import ErrorAlert from "../layout/ErrorAlert";
 
 export default function NewReservation() {
   const history = useHistory();
   const today = new Date();
 
+  // sets the initial state
   const initialState = {
     first_name: "",
     last_name: "",
@@ -30,7 +31,8 @@ export default function NewReservation() {
         people: Number(reservation.people),
       }, abortController.signal);
     } catch (error) {
-      setReservationErrors(error);
+      setReservationErrors(error.message.split("."));
+
       return;
     }
     let resDate = reservation.reservation_date;
@@ -40,11 +42,12 @@ export default function NewReservation() {
 
   return (
     <>
-      <ErrorList error={reservationErrors}/>
+      <ErrorAlert error={reservationErrors}/>
       <ReservationForm
         reservation={reservation}
         setReservation={setReservation}
         submitHandler={submitHandler}
+        status={"Create"}
       />
     </>
   );

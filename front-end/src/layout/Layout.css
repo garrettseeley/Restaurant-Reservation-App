@@ -1,4 +1,25 @@
 .side-bar {
-  background-color: #393a44;
+  background-color: var(--indigoDye);
   min-width: 200px;
+}
+.bg-maincolor {
+  background-color: #F1F7ED;
+}
+.thead-ox th {
+  color: #fff;
+  background-color: var(--indigoDye);
+}
+.tbody-white td {
+  color: #0B0A0A;
+  background-color: white;
+}
+
+
+
+:root {
+  --charcoal: #384657;
+  --indigoDye: #124269;
+  --oxfordBlue: #092134;
+  --unbleachedSilk: #F9DEC9;
+  --champagnePink: #FBE8DA
 }

@@ -5,6 +5,7 @@ import { listReservations, listTables } from "../utils/api";
 export default function TableItem({ table, setTables, setReservations, date }) {
   let status = !table.reservation_id ? "Free" : "Occupied";
 
+  // window popup to confirm if you want to finish the seated table to open up to another reservation
   async function deleteHandler(table) {
     const abortController = new AbortController();
 
@@ -16,13 +17,14 @@ export default function TableItem({ table, setTables, setReservations, date }) {
     }
   }
 
+  // function to refresh tables when the finish button is pressed
   function refreshTables() {
     const abortController = new AbortController();
     listTables(abortController.signal).then(setTables);
 
     return () => abortController.abort();
   }
-
+  // function to refresh reservations when the finish button is pressed
   function refreshRes() {
     const abortController = new AbortController();
     listReservations({ date }, abortController.signal).then(setReservations);
@@ -30,11 +32,11 @@ export default function TableItem({ table, setTables, setReservations, date }) {
   }
 
   return (
-    <tr key={table.table_id} data-table-id-status={table.table_id}>
+    <>
       <td>{table.table_id}</td>
       <td>{table.table_name}</td>
       <td>{table.capacity}</td>
-      <td>{status}</td>
+      <td data-table-id-status={table.table_id}>{status}</td>
       <td>
         {table.reservation_id && (
           <button
@@ -50,6 +52,6 @@ export default function TableItem({ table, setTables, setReservations, date }) {
           </button>
         )}
       </td>
-    </tr>
+    </>
   );
 }

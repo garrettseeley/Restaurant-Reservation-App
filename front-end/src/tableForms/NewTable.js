@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import TableForm from "./TableForm";
 import { postTable } from "../utils/api";
-import ErrorList from "../layout/ErrorList";
+import ErrorAlert from "../layout/ErrorAlert";
 
 export default function NewTable() {
   const history = useHistory();
 
+  //sets the initial state
   const initialState = {
     table_name: "",
     capacity: "",
@@ -23,7 +24,7 @@ export default function NewTable() {
         capacity: Number(table.capacity),
       });
     } catch (error) {
-      setTableErrors(error);
+      setTableErrors(error.message.split("."));
       return;
     }
     setTable({ ...initialState });
@@ -32,7 +33,7 @@ export default function NewTable() {
 
   return (
     <>
-      <ErrorList error={tableErrors} />
+      <ErrorAlert error={tableErrors} />
       <TableForm
         table={table}
         setTable={setTable}

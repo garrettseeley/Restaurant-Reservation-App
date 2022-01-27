@@ -3,12 +3,13 @@ import { useHistory, useParams } from "react-router-dom";
 import ReservationForm from "./ReservationForm";
 import { asDateString } from "../utils/date-time";
 import { readReservation, updateReservation } from "../utils/api";
-import ErrorList from "../layout/ErrorList";
+import ErrorAlert from "../layout/ErrorAlert";
 
 export default function EditReservation() {
   const history = useHistory();
   const { reservation_id } = useParams();
 
+  //sets the initial state
   const initialState = {
     first_name: "",
     last_name: "",
@@ -21,6 +22,7 @@ export default function EditReservation() {
   const [reservation, setReservation] = useState({ ...initialState });
   const [reservationErrors, setReservationErrors] = useState(null);
 
+  //loads a single reservation based on the reservation id from the url param
   useEffect(() => {
     const abortController = new AbortController();
     async function singleReservation() {
@@ -48,7 +50,7 @@ export default function EditReservation() {
         people: Number(reservation.people),
       }, abortController.signal);
     } catch (error) {
-      setReservationErrors(error);
+      setReservationErrors(error.message.split("."));
       return;
     }
     let resDate = reservation.reservation_date;
@@ -58,11 +60,12 @@ export default function EditReservation() {
 
   return (
     <>
-      <ErrorList error={reservationErrors} />
+      <ErrorAlert error={reservationErrors} />
       <ReservationForm 
         reservation={reservation}
         setReservation={setReservation}
         submitHandler={submitHandler}
+        status={"Edit"}
       />
     </>
   );

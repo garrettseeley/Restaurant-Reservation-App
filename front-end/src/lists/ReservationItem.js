@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { updateResStatus } from "../utils/api";
 
 export default function ReservationItem({ reservation, refreshRes }) {
+  
+  // window popup to confirm if you want to cancel reservation
   async function cancelHandler(reservation_id) {
     const abortController = new AbortController();
 
@@ -19,13 +21,13 @@ export default function ReservationItem({ reservation, refreshRes }) {
   }
 
   return (
-    <tr key={reservation.reservation_id}>
+    <>
       <td>{reservation.reservation_id}</td>
       <td>
         {reservation.last_name}, {reservation.first_name}
       </td>
       <td>{reservation.mobile_number}</td>
-      <td>{reservation.reservation_date}</td>
+      <td>{reservation.reservation_date.slice(0, 10)}</td>
       <td>{reservation.reservation_time}</td>
       <td>{reservation.people}</td>
       <td data-reservation-id-status={reservation.reservation_id}>
@@ -35,7 +37,7 @@ export default function ReservationItem({ reservation, refreshRes }) {
         {reservation.status === "booked" && (
           <Link to={`/reservations/${reservation.reservation_id}/seat`}>
             <button
-              className="btn btn-secondary mr-2"
+              className="btn btn-primary mr-2 btn-sm"
               type="submit"
               href={`/reservations/${reservation.reservation_id}/seat`}
             >
@@ -46,7 +48,7 @@ export default function ReservationItem({ reservation, refreshRes }) {
         {reservation.status === "booked" && (
           <Link to={`/reservations/${reservation.reservation_id}/edit`}>
             <button
-              className="btn btn-secondary mr-2"
+              className="btn btn-dark mr-2 btn-sm"
               type="submit"
               href={`/reservations/${reservation.reservation_id}/edit`}
             >
@@ -57,7 +59,7 @@ export default function ReservationItem({ reservation, refreshRes }) {
         {reservation.status === "booked" && (
           <button
             type="button"
-            className="btn btn-secondary"
+            className="btn btn-secondary btn-sm"
             data-reservation-id-cancel={reservation.reservation_id}
             onClick={(event) => {
               event.preventDefault();
@@ -68,6 +70,6 @@ export default function ReservationItem({ reservation, refreshRes }) {
           </button>
         )}
       </td>
-    </tr>
+    </>
   );
 }

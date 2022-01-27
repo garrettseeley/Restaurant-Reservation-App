@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import ErrorList from "./layout/ErrorList";
+import ErrorAlert from "./layout/ErrorAlert";
 import { listTables } from "./utils/api";
 import { updateTable } from "./utils/api";
 
@@ -18,6 +18,7 @@ export default function SeatTable() {
     </option>
   ));
 
+  // loads the list of tables that are available
   useEffect(loadTables, []);
 
   function loadTables() {
@@ -54,7 +55,7 @@ export default function SeatTable() {
 
   return (
     <>
-      <ErrorList error={tablesError} />
+      <ErrorAlert error={tablesError} />
       <div className="row">
         <h2 className="col">Seat Reservation</h2>
       </div>

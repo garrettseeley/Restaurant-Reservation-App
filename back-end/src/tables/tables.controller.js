@@ -4,6 +4,7 @@ const resService = require("../reservations/reservations.service");
 
 // Middleware validation
 
+// verifies that data has been entered
 function hasData(req, res, next) {
   const { data } = req.body;
   if (!data) {
@@ -14,6 +15,8 @@ function hasData(req, res, next) {
   }
   next();
 }
+
+// checks if all components of a table entered are valid
 async function validTable(req, res, next) {
   const { data } = req.body;
   const errorMsgs = [];
@@ -39,6 +42,7 @@ async function validTable(req, res, next) {
   next();
 }
 
+// checks if the update has a reservation id
 function hasId(req, res, next) {
   if (!req.body.data.reservation_id) {
     next({
@@ -49,6 +53,7 @@ function hasId(req, res, next) {
   next();
 }
 
+// checks if the update has valid properties
 async function validUpdate(req, res, next) {
   let table = await service.read(req.params.table_id);
   let reservation = await resService.read(req.body.data.reservation_id);
@@ -79,6 +84,7 @@ async function validUpdate(req, res, next) {
   next();
 }
 
+// checks if table is occupied
 async function tableOccupied(req, res, next) {
   const { table_id } = req.params;
   const table = await service.read(table_id);

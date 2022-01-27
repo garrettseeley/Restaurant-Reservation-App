@@ -7,6 +7,8 @@ const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
  * List handler for reservation resources
  */
 // Middleware validation
+
+// checks if all components of a reservation are valid
 async function validReservation(req, res, next) {
   const { data } = req.body;
   const errorMsgs = [];
@@ -78,6 +80,7 @@ async function validReservation(req, res, next) {
   next();
 }
 
+// checks if reservation exists
 async function reservationExists(req, res, next) {
   let { reservation_id } = req.params;
   const reservation = await service.read(reservation_id);
@@ -92,6 +95,7 @@ async function reservationExists(req, res, next) {
   next();
 }
 
+// checks if reservation is seated
 function notSeated(req, res, next) {
   const { status, reservation_id } = req.body.data;
   if (status === "seated") {
@@ -109,6 +113,7 @@ function notSeated(req, res, next) {
   next();
 }
 
+// checks if the status is valid
 function validStatusUpdate(req, res, next) {
   let reservation = res.locals.reservation;
 
