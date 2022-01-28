@@ -27,7 +27,9 @@ export default function Search() {
   return (
     <>
       <div className="row">
-        <h2 className="col d-flex justify-content-center">Search by Mobile Number</h2>
+        <h2 className="col d-flex justify-content-center">
+          Search by Mobile Number
+        </h2>
       </div>
       <div className="row d-flex justify-content-center mt-3">
         <div className="col-auto">
@@ -54,12 +56,14 @@ export default function Search() {
         </div>
       </div>
       <div className="d-flex justify-content-center">
-        {!reservations.length && searched && (
+        {!reservations?.length && searched && (
           <div className="row">
-            <div className="col text-danger mt-4"><h3>No reservations found</h3></div>
+            <div className="col text-danger mt-4">
+              <h3>No reservations found</h3>
+            </div>
           </div>
         )}
-        {reservations.length > 0 && searched && (
+        {reservations?.length > 0 && searched && (
           <div className="row mt-4">
             <div className="col">
               <ReservationList
