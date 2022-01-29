@@ -8,20 +8,10 @@ import React from "react";
  *  a bootstrap danger alert that contains the message string.
  */
 
-function ErrorAlert({ error = [] }) {
-  // maps the error messages 
-  const errorItems = error?.map((errMessage, index) => (
-    <>
-      {errMessage && (
-        <li key={index}>{errMessage.replace(/[_]/g, " ")}.</li>
-      )}
-    </>
-  ));
+function ErrorAlert({ error }) {
   return (
     error && (
-      <div className="alert alert-danger mt-2">
-        <ul>{errorItems}</ul>
-      </div>
+      <div className="alert alert-danger m-2">Error: {error.message}</div>
     )
   );
 }

@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import { postReservation } from "../utils/api";
 import { asDateString } from "../utils/date-time";
 import ReservationForm from "./ReservationForm";
-import ErrorAlert from "../layout/ErrorAlert";
 
 export default function NewReservation() {
   const history = useHistory();
@@ -42,7 +41,16 @@ export default function NewReservation() {
 
   return (
     <>
-      <ErrorAlert error={reservationErrors}/>
+      {!reservationErrors ? null : (
+        <div className="alert alert-danger mt-2">
+          <ul>
+            {reservationErrors.map((errMsg, index) => (
+              errMsg && <li key={index}>{errMsg.replace(/[_]/g, " ")}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {/* <ErrorAlert error={reservationErrors}/> */}
       <ReservationForm
         reservation={reservation}
         setReservation={setReservation}

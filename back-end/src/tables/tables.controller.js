@@ -75,7 +75,7 @@ async function validUpdate(req, res, next) {
       message: `This table is occupied.`,
     });
   }
-  if (reservation.status === "seated") {
+  if (!reservation.status || reservation.status === "seated") {
     next({
       status: 400,
       message: `Reservation #${reservation.reservation_id} is already seated.`,

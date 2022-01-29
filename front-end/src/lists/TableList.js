@@ -8,7 +8,7 @@ export default function TableList({
   date,
 }) {
   // maps each item from the table to the table row
-  const listItems = tables.map((table) => (
+  const listItems = tables?.map((table) => (
     <tr key={table.table_id}>
       <TableItem
         table={table}

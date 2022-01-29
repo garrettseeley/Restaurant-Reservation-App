@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import TableForm from "./TableForm";
 import { postTable } from "../utils/api";
-import ErrorAlert from "../layout/ErrorAlert";
 
 export default function NewTable() {
   const history = useHistory();
@@ -33,7 +32,15 @@ export default function NewTable() {
 
   return (
     <>
-      <ErrorAlert error={tableErrors} />
+      {!tableErrors ? null : (
+        <div className="alert alert-danger mt-2">
+          <ul>
+            {tableErrors.map((errMsg, index) => (
+              errMsg && <li key={index}>{errMsg.replace(/[_]/g, " ")}</li>
+            ))}
+          </ul>
+        </div>
+      )}
       <TableForm
         table={table}
         setTable={setTable}
