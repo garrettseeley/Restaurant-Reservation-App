@@ -58,7 +58,7 @@ function Dashboard({ date }) {
               <button className="btn btn-secondary btn-lg">Next<span className="oi oi-arrow-right ml-3"></span></button>
             </Link>
           </div>
-          <div className="d-md-flex justify-content-center mb-3 mt-5">
+          <div className="d-flex justify-content-center mb-3 mt-5">
             <h4 className="mb-0">Reservations for date {date}</h4>
           </div>
           <ErrorAlert error={reservationsError} />

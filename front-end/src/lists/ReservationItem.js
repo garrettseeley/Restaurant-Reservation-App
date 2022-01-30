@@ -37,7 +37,7 @@ export default function ReservationItem({ reservation, refreshRes }) {
         {reservation.status === "booked" && (
           <Link to={`/reservations/${reservation.reservation_id}/seat`}>
             <button
-              className="btn btn-primary mr-2 btn-sm"
+              className="btn btn-primary mr-2 btn-sm mb-1"
               type="submit"
               href={`/reservations/${reservation.reservation_id}/seat`}
             >
@@ -48,7 +48,7 @@ export default function ReservationItem({ reservation, refreshRes }) {
         {reservation.status === "booked" && (
           <Link to={`/reservations/${reservation.reservation_id}/edit`}>
             <button
-              className="btn btn-dark mr-2 btn-sm"
+              className="btn btn-dark mr-2 btn-sm mb-1"
               type="submit"
               href={`/reservations/${reservation.reservation_id}/edit`}
             >
@@ -59,7 +59,7 @@ export default function ReservationItem({ reservation, refreshRes }) {
         {reservation.status === "booked" && (
           <button
             type="button"
-            className="btn btn-secondary btn-sm"
+            className="btn btn-secondary btn-sm mb-1"
             data-reservation-id-cancel={reservation.reservation_id}
             onClick={(event) => {
               event.preventDefault();
