@@ -50,7 +50,6 @@ export default function NewReservation() {
           </ul>
         </div>
       )}
-      {/* <ErrorAlert error={reservationErrors}/> */}
       <ReservationForm
         reservation={reservation}
         setReservation={setReservation}
